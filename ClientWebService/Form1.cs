@@ -104,13 +104,17 @@ namespace ClientWebService
                 {
                     MessageBox.Show("Errore: " + response.StatusCode);
                 }
-                pnlPostPut.Hide();
             }
             else
             {
                 MessageBox.Show("Campi non validi.");
             }
-            
+            txtPostNome.Clear();
+            txtPostPrezzo.Clear();
+            txtPostCategoria.Clear();
+            txtPostSviluppatore.Clear();
+            txtPostPubblicatore.Clear();
+            pnlPostPut.Hide();
         }
 
 
@@ -142,24 +146,37 @@ namespace ClientWebService
             {
                 MessageBox.Show("Campi non validi.");
             }
+            txtPostNome.Clear();
+            txtPostPrezzo.Clear();
+            txtPostCategoria.Clear();
+            txtPostSviluppatore.Clear();
+            txtPostPubblicatore.Clear();
             pnlPostPut.Hide();
             txtId.Clear();
         }
 
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(txtDeleteId.Text);
-
-            HttpResponseMessage response = await client.DeleteAsync($"{BaseUrl}/{id}");
-
-            if (response.IsSuccessStatusCode)
+            if (txtDeleteId.Text != "")
             {
-                // Esegue operazioni se necessario
+                int id = Convert.ToInt32(txtDeleteId.Text);
+
+                HttpResponseMessage response = await client.DeleteAsync($"{BaseUrl}/del/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Record eliminato con successo:" + response.StatusCode);
+                }
+                else
+                {
+                    MessageBox.Show("Errore: " + response.StatusCode);
+                }
             }
-            else
+            else 
             {
-                MessageBox.Show("Errore: " + response.StatusCode);
+                MessageBox.Show("Specificare un ID.");
             }
+            txtDeleteId.Clear();
         }
 
         private void btnApriPost_Click(object sender, EventArgs e)
@@ -184,7 +201,7 @@ namespace ClientWebService
             }
             else
             {
-                MessageBox.Show("Bisogna specificare un id numerico.");
+                MessageBox.Show("Bisogna specificare un ID numerico.");
             }
         }
     }
