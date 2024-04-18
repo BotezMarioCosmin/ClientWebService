@@ -32,7 +32,7 @@ namespace ClientWebService
         {
             InitializeComponent();
             client = new HttpClient();
-            pnlPost.Hide();
+            pnlPostPut.Hide();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -104,7 +104,7 @@ namespace ClientWebService
                 {
                     MessageBox.Show("Errore: " + response.StatusCode);
                 }
-                pnlPost.Hide();
+                pnlPostPut.Hide();
             }
             else
             {
@@ -116,29 +116,39 @@ namespace ClientWebService
 
         private async void btnPut_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(txtId.Text);
-            var data = new { a = Int32.Parse(txtRecord.Text), b = Int32.Parse(txtPostPrezzo.Text) };
-            string json = JsonConvert.SerializeObject(data);
-
-            var content = new StringContent(json);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            HttpResponseMessage response = await client.PutAsync($"{BaseUrl}/put/{id}", content);
-
-            if (response.IsSuccessStatusCode)
+            if (txtPostNome.Text != null && txtPostPrezzo.Text != null && txtPostCategoria.Text != null && txtPostSviluppatore.Text != null && txtPostPubblicatore.Text != null)
             {
-                // Esegue operazioni se necessario
+                int id = Convert.ToInt32(txtId.Text);
+                //crea aggetto
+                var data = new { Prodottoid = id, nome = txtPostNome.Text, prezzo = txtPostPrezzo.Text, categoria = txtPostCategoria.Text, sviluppatore = txtPostSviluppatore.Text, pubblicatore = txtPostPubblicatore.Text };
+
+                string json = JsonConvert.SerializeObject(data);
+
+                var content = new StringContent(json);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                HttpResponseMessage response = await client.PutAsync($"{BaseUrl}/put/{id}", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Record aggiornato con successo:" + response.StatusCode);
+                }
+                else
+                {
+                    MessageBox.Show("Errore: " + response.StatusCode);
+                }
             }
             else
             {
-                MessageBox.Show("Errore: " + response.StatusCode);
+                MessageBox.Show("Campi non validi.");
             }
+            pnlPostPut.Hide();
             txtId.Clear();
         }
 
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(txtId.Text); // Assumi che l'ID dell'elemento da eliminare sia inserito in un campo di testo chiamato txtId
+            int id = Convert.ToInt32(txtDeleteId.Text);
 
             HttpResponseMessage response = await client.DeleteAsync($"{BaseUrl}/{id}");
 
@@ -154,14 +164,14 @@ namespace ClientWebService
 
         private void btnApriPost_Click(object sender, EventArgs e)
         {
-            pnlPost.Show();
+            pnlPostPut.Show();
             btnPost.Show();
             btnPut.Hide();
         }
 
         private void btnPostIndietro_Click(object sender, EventArgs e)
         {
-            pnlPost.Hide();
+            pnlPostPut.Hide();
         }
 
         private void btnApriPut_Click(object sender, EventArgs e)
@@ -170,7 +180,7 @@ namespace ClientWebService
             btnPut.Show();
             if (txtId.Text != "" && int.TryParse(txtId.Text, out int id))
             {
-                pnlPost.Show();
+                pnlPostPut.Show();
             }
             else
             {

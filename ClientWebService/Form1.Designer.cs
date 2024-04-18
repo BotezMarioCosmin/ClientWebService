@@ -33,14 +33,13 @@
             this.btnGet = new System.Windows.Forms.Button();
             this.btnPost = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.txtId = new System.Windows.Forms.TextBox();
             this.lbl1 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPostNome = new System.Windows.Forms.TextBox();
             this.txtPostCategoria = new System.Windows.Forms.TextBox();
             this.txtPostSviluppatore = new System.Windows.Forms.TextBox();
             this.txtPostPubblicatore = new System.Windows.Forms.TextBox();
-            this.pnlPost = new System.Windows.Forms.Panel();
+            this.pnlPostPut = new System.Windows.Forms.Panel();
             this.lblPost5 = new System.Windows.Forms.Label();
             this.lblPost4 = new System.Windows.Forms.Label();
             this.lblPost3 = new System.Windows.Forms.Label();
@@ -52,8 +51,12 @@
             this.btnApriPut = new System.Windows.Forms.Button();
             this.lblPut = new System.Windows.Forms.Label();
             this.btnPut = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.txtDeleteId = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.pnlPost.SuspendLayout();
+            this.pnlPostPut.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtRecord
@@ -97,13 +100,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(776, 340);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // txtId
-            // 
-            this.txtId.Location = new System.Drawing.Point(363, 41);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(134, 20);
-            this.txtId.TabIndex = 5;
             // 
             // lbl1
             // 
@@ -151,26 +147,26 @@
             this.txtPostPubblicatore.Size = new System.Drawing.Size(100, 20);
             this.txtPostPubblicatore.TabIndex = 11;
             // 
-            // pnlPost
+            // pnlPostPut
             // 
-            this.pnlPost.Controls.Add(this.btnPut);
-            this.pnlPost.Controls.Add(this.btnPostIndietro);
-            this.pnlPost.Controls.Add(this.lblPost);
-            this.pnlPost.Controls.Add(this.lblPost5);
-            this.pnlPost.Controls.Add(this.lblPost4);
-            this.pnlPost.Controls.Add(this.lblPost3);
-            this.pnlPost.Controls.Add(this.lblPost2);
-            this.pnlPost.Controls.Add(this.lblPost1);
-            this.pnlPost.Controls.Add(this.btnPost);
-            this.pnlPost.Controls.Add(this.txtPostPubblicatore);
-            this.pnlPost.Controls.Add(this.txtPostNome);
-            this.pnlPost.Controls.Add(this.txtPostSviluppatore);
-            this.pnlPost.Controls.Add(this.txtPostPrezzo);
-            this.pnlPost.Controls.Add(this.txtPostCategoria);
-            this.pnlPost.Location = new System.Drawing.Point(279, 121);
-            this.pnlPost.Name = "pnlPost";
-            this.pnlPost.Size = new System.Drawing.Size(218, 219);
-            this.pnlPost.TabIndex = 13;
+            this.pnlPostPut.Controls.Add(this.btnPut);
+            this.pnlPostPut.Controls.Add(this.btnPostIndietro);
+            this.pnlPostPut.Controls.Add(this.lblPost);
+            this.pnlPostPut.Controls.Add(this.lblPost5);
+            this.pnlPostPut.Controls.Add(this.lblPost4);
+            this.pnlPostPut.Controls.Add(this.lblPost3);
+            this.pnlPostPut.Controls.Add(this.lblPost2);
+            this.pnlPostPut.Controls.Add(this.lblPost1);
+            this.pnlPostPut.Controls.Add(this.btnPost);
+            this.pnlPostPut.Controls.Add(this.txtPostPubblicatore);
+            this.pnlPostPut.Controls.Add(this.txtPostNome);
+            this.pnlPostPut.Controls.Add(this.txtPostSviluppatore);
+            this.pnlPostPut.Controls.Add(this.txtPostPrezzo);
+            this.pnlPostPut.Controls.Add(this.txtPostCategoria);
+            this.pnlPostPut.Location = new System.Drawing.Point(279, 121);
+            this.pnlPostPut.Name = "pnlPostPut";
+            this.pnlPostPut.Size = new System.Drawing.Size(218, 219);
+            this.pnlPostPut.TabIndex = 13;
             // 
             // lblPost5
             // 
@@ -276,16 +272,52 @@
             this.btnPut.UseVisualStyleBackColor = true;
             this.btnPut.Click += new System.EventHandler(this.btnPut_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(535, 12);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(134, 23);
+            this.btnDelete.TabIndex = 17;
+            this.btnDelete.Text = "DELETE";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(363, 41);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(134, 20);
+            this.txtId.TabIndex = 5;
+            // 
+            // txtDeleteId
+            // 
+            this.txtDeleteId.Location = new System.Drawing.Point(535, 41);
+            this.txtDeleteId.Name = "txtDeleteId";
+            this.txtDeleteId.Size = new System.Drawing.Size(134, 20);
+            this.txtDeleteId.TabIndex = 18;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(532, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(85, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Inserire id record";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtDeleteId);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblPut);
             this.Controls.Add(this.btnApriPut);
             this.Controls.Add(this.btnApriPost);
-            this.Controls.Add(this.pnlPost);
+            this.Controls.Add(this.pnlPostPut);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl1);
             this.Controls.Add(this.txtId);
@@ -296,8 +328,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.pnlPost.ResumeLayout(false);
-            this.pnlPost.PerformLayout();
+            this.pnlPostPut.ResumeLayout(false);
+            this.pnlPostPut.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,14 +342,13 @@
         private System.Windows.Forms.Button btnGet;
         private System.Windows.Forms.Button btnPost;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Label lbl1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtPostNome;
         private System.Windows.Forms.TextBox txtPostCategoria;
         private System.Windows.Forms.TextBox txtPostSviluppatore;
         private System.Windows.Forms.TextBox txtPostPubblicatore;
-        private System.Windows.Forms.Panel pnlPost;
+        private System.Windows.Forms.Panel pnlPostPut;
         private System.Windows.Forms.Label lblPost5;
         private System.Windows.Forms.Label lblPost4;
         private System.Windows.Forms.Label lblPost3;
@@ -329,6 +360,10 @@
         private System.Windows.Forms.Button btnApriPut;
         private System.Windows.Forms.Label lblPut;
         private System.Windows.Forms.Button btnPut;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.TextBox txtDeleteId;
+        private System.Windows.Forms.Label label2;
     }
 }
 
