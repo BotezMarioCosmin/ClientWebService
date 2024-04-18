@@ -15,7 +15,7 @@ namespace ClientWebService
 {
     public partial class Form1 : Form
     {
-        private const string BaseUrl = "http://localhost/phpmyadmin";
+        private const string BaseUrl = "http://localhost/wsphp/index.php/prodotti";
 
         private HttpClient client;
         public Form1()
@@ -31,7 +31,7 @@ namespace ClientWebService
 
         private async void btnGet_Click(object sender, EventArgs e)
         {
-            HttpResponseMessage response = await client.GetAsync(BaseUrl + "resource");
+            HttpResponseMessage response = await client.GetAsync(BaseUrl);// + "resource");
             string responseBody = await response.Content.ReadAsStringAsync();
 
             // Gestione del codice di risposta
@@ -40,7 +40,8 @@ namespace ClientWebService
                 // Conversione da JSON a oggetto
                 var data = JsonConvert.DeserializeObject(responseBody);
                 // Rappresentazione grafica dei dati
-                // Esempio: dataGridView.DataSource = data;
+                dataGridView1.DataSource = data;
+                MessageBox.Show("GET eseguito con successo: " + response.StatusCode);
             }
             else
             {
