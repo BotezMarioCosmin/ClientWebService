@@ -23,6 +23,7 @@ namespace ClientWebService
             string categoria;
             string sviluppatore;
             string pubblicatore;
+            
         }
 
         private const string BaseUrl = "http://localhost/wsphp/index.php/prodotti";
@@ -60,7 +61,7 @@ namespace ClientWebService
             //codice risposta
             if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show(responseBody);
+                //MessageBox.Show(responseBody);
                 //conversione
                 var data = JsonConvert.DeserializeObject(responseBody);
                 //visualizza
@@ -115,6 +116,7 @@ namespace ClientWebService
             txtPostSviluppatore.Clear();
             txtPostPubblicatore.Clear();
             pnlPostPut.Hide();
+            btnGet_Click(sender, e);
         }
 
 
@@ -153,6 +155,7 @@ namespace ClientWebService
             txtPostPubblicatore.Clear();
             pnlPostPut.Hide();
             txtId.Clear();
+            btnGet_Click(sender, e);
         }
 
         private async void btnDelete_Click(object sender, EventArgs e)

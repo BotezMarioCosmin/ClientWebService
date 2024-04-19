@@ -40,17 +40,17 @@
             this.txtPostSviluppatore = new System.Windows.Forms.TextBox();
             this.txtPostPubblicatore = new System.Windows.Forms.TextBox();
             this.pnlPostPut = new System.Windows.Forms.Panel();
+            this.btnPut = new System.Windows.Forms.Button();
+            this.btnPostIndietro = new System.Windows.Forms.Button();
+            this.lblPost = new System.Windows.Forms.Label();
             this.lblPost5 = new System.Windows.Forms.Label();
             this.lblPost4 = new System.Windows.Forms.Label();
             this.lblPost3 = new System.Windows.Forms.Label();
             this.lblPost2 = new System.Windows.Forms.Label();
             this.lblPost1 = new System.Windows.Forms.Label();
-            this.lblPost = new System.Windows.Forms.Label();
-            this.btnPostIndietro = new System.Windows.Forms.Button();
             this.btnApriPost = new System.Windows.Forms.Button();
             this.btnApriPut = new System.Windows.Forms.Button();
             this.lblPut = new System.Windows.Forms.Label();
-            this.btnPut = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.txtId = new System.Windows.Forms.TextBox();
             this.txtDeleteId = new System.Windows.Forms.TextBox();
@@ -168,6 +168,36 @@
             this.pnlPostPut.Size = new System.Drawing.Size(218, 219);
             this.pnlPostPut.TabIndex = 13;
             // 
+            // btnPut
+            // 
+            this.btnPut.Location = new System.Drawing.Point(112, 179);
+            this.btnPut.Name = "btnPut";
+            this.btnPut.Size = new System.Drawing.Size(84, 23);
+            this.btnPut.TabIndex = 26;
+            this.btnPut.Text = "Esegui PUT";
+            this.btnPut.UseVisualStyleBackColor = true;
+            this.btnPut.Click += new System.EventHandler(this.btnPut_Click);
+            // 
+            // btnPostIndietro
+            // 
+            this.btnPostIndietro.Location = new System.Drawing.Point(24, 179);
+            this.btnPostIndietro.Name = "btnPostIndietro";
+            this.btnPostIndietro.Size = new System.Drawing.Size(84, 23);
+            this.btnPostIndietro.TabIndex = 25;
+            this.btnPostIndietro.Text = "Indietro";
+            this.btnPostIndietro.UseVisualStyleBackColor = true;
+            this.btnPostIndietro.Click += new System.EventHandler(this.btnPostIndietro_Click);
+            // 
+            // lblPost
+            // 
+            this.lblPost.AutoSize = true;
+            this.lblPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPost.Location = new System.Drawing.Point(20, 11);
+            this.lblPost.Name = "lblPost";
+            this.lblPost.Size = new System.Drawing.Size(187, 24);
+            this.lblPost.TabIndex = 24;
+            this.lblPost.Text = "Inserisci valori record";
+            // 
             // lblPost5
             // 
             this.lblPost5.AutoSize = true;
@@ -213,26 +243,6 @@
             this.lblPost1.TabIndex = 19;
             this.lblPost1.Text = "Nome:";
             // 
-            // lblPost
-            // 
-            this.lblPost.AutoSize = true;
-            this.lblPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPost.Location = new System.Drawing.Point(20, 11);
-            this.lblPost.Name = "lblPost";
-            this.lblPost.Size = new System.Drawing.Size(187, 24);
-            this.lblPost.TabIndex = 24;
-            this.lblPost.Text = "Inserisci valori record";
-            // 
-            // btnPostIndietro
-            // 
-            this.btnPostIndietro.Location = new System.Drawing.Point(24, 179);
-            this.btnPostIndietro.Name = "btnPostIndietro";
-            this.btnPostIndietro.Size = new System.Drawing.Size(84, 23);
-            this.btnPostIndietro.TabIndex = 25;
-            this.btnPostIndietro.Text = "Indietro";
-            this.btnPostIndietro.UseVisualStyleBackColor = true;
-            this.btnPostIndietro.Click += new System.EventHandler(this.btnPostIndietro_Click);
-            // 
             // btnApriPost
             // 
             this.btnApriPost.Location = new System.Drawing.Point(190, 12);
@@ -261,16 +271,6 @@
             this.lblPut.Size = new System.Drawing.Size(85, 13);
             this.lblPut.TabIndex = 16;
             this.lblPut.Text = "Inserire id record";
-            // 
-            // btnPut
-            // 
-            this.btnPut.Location = new System.Drawing.Point(112, 179);
-            this.btnPut.Name = "btnPut";
-            this.btnPut.Size = new System.Drawing.Size(84, 23);
-            this.btnPut.TabIndex = 26;
-            this.btnPut.Text = "Esegui PUT";
-            this.btnPut.UseVisualStyleBackColor = true;
-            this.btnPut.Click += new System.EventHandler(this.btnPut_Click);
             // 
             // btnDelete
             // 
