@@ -15,16 +15,16 @@ namespace ClientWebService
 {
     public partial class Form1 : Form
     {
-        public class Prodotto 
+        public class Prodotto
         {
-            string Prodottoid;
-            string nome;
-            string prezzo;
-            string categoria;
-            string sviluppatore;
-            string pubblicatore;
-            
+            public string Prodottoid { get; set; }
+            public string nome { get; set; }
+            public string prezzo { get; set; }
+            public string categoria { get; set; }
+            public string sviluppatore { get; set; }
+            public string pubblicatore { get; set; }
         }
+
 
         private const string BaseUrl = "http://localhost/wsphp/index.php/prodotti";
 
@@ -157,30 +157,49 @@ namespace ClientWebService
             txtId.Clear();
             btnGet_Click(sender, e);
         }
-
         private async void btnDelete_Click(object sender, EventArgs e)
         {
             if (txtDeleteId.Text != "")
             {
-                int id = Convert.ToInt32(txtDeleteId.Text);
-
-                HttpResponseMessage response = await client.DeleteAsync($"{BaseUrl}/del/{id}");
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    MessageBox.Show("Record eliminato con successo:" + response.StatusCode);
+                    int id = Convert.ToInt32(txtDeleteId.Text);
+                    //verifica esistenza elemento
+                    HttpResponseMessage checkResponse = await client.GetAsync($"{BaseUrl}/{id}");
+
+                    if (checkResponse.IsSuccessStatusCode)
+                    {
+                        //se elemento esiste eliminalo
+                        HttpResponseMessage response = await client.DeleteAsync($"{BaseUrl}/del/{id}");
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Record eliminato con successo:" + response.StatusCode);
+                            btnGet_Click(sender, e);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Errore durante l'eliminazione: " + response.StatusCode);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("L'elemento con l'ID specificato non esiste.");
+                    }
                 }
-                else
+                catch 
                 {
-                    MessageBox.Show("Errore: " + response.StatusCode);
+                    MessageBox.Show("L'ID deve essere un numero.");
                 }
+
             }
-            else 
+            else
             {
                 MessageBox.Show("Specificare un ID.");
             }
             txtDeleteId.Clear();
         }
+
 
         private void btnApriPost_Click(object sender, EventArgs e)
         {
@@ -192,20 +211,67 @@ namespace ClientWebService
         private void btnPostIndietro_Click(object sender, EventArgs e)
         {
             pnlPostPut.Hide();
+            txtId.Clear();
         }
 
-        private void btnApriPut_Click(object sender, EventArgs e)
+        private async void btnApriPut_Click(object sender, EventArgs e)
         {
             btnPost.Hide();
             btnPut.Show();
+
             if (txtId.Text != "" && int.TryParse(txtId.Text, out int id))
             {
-                pnlPostPut.Show();
+                //verifica esistenza
+                HttpResponseMessage checkResponse = await client.GetAsync($"{BaseUrl}/{id}");
+
+                if (checkResponse.IsSuccessStatusCode)
+                {
+                    //info
+                    Prodotto prodotto = await GetProdotto(id);
+
+                    
+                    if (prodotto != null)
+                    {
+                        txtPostNome.Text = prodotto.nome;
+                        txtPostPrezzo.Text = prodotto.prezzo;
+                        txtPostCategoria.Text = prodotto.categoria;
+                        txtPostSviluppatore.Text = prodotto.sviluppatore;
+                        txtPostPubblicatore.Text = prodotto.pubblicatore;
+
+                        pnlPostPut.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Errore nel recupero delle informazioni del prodotto.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("L'elemento con l'ID specificato non esiste.");
+                    txtId.Clear();
+                }
             }
             else
             {
                 MessageBox.Show("Bisogna specificare un ID numerico.");
             }
         }
+
+        private async Task<Prodotto> GetProdotto(int id)
+        {
+            HttpResponseMessage response = await client.GetAsync($"{BaseUrl}/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                Prodotto prodotto = JsonConvert.DeserializeObject<Prodotto>(responseBody);
+                return prodotto;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }
