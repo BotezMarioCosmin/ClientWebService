@@ -51,28 +51,42 @@ namespace ClientWebService
             {
                 response = await client.GetAsync(BaseUrl);
                 responseBody = await response.Content.ReadAsStringAsync();
-            }
-            else 
-            {
-                response = await client.GetAsync((BaseUrl) + "/" + txtRecord.Text);
-                responseBody = await response.Content.ReadAsStringAsync();
-            }
 
-            //codice risposta
-            if (response.IsSuccessStatusCode)
-            {
-                //MessageBox.Show(responseBody);
-                //conversione
-                var data = JsonConvert.DeserializeObject(responseBody);
-                //visualizza
-                dataGridView1.DataSource = data;
-                MessageBox.Show("GET eseguito con successo: " + response.StatusCode);
+                if (response.IsSuccessStatusCode)
+                {
+                    //deserializ
+                    var productList = JsonConvert.DeserializeObject<List<Prodotto>>(responseBody);
+
+                    dataGridView1.DataSource = productList;
+
+                    MessageBox.Show("GET eseguito con successo: " + response.StatusCode);
+                }
             }
             else
             {
-                MessageBox.Show("Errore: " + response.StatusCode);
+                response = await client.GetAsync($"{BaseUrl}/{txtRecord.Text}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    responseBody = await response.Content.ReadAsStringAsync();
+
+                    //deserializ
+                    Prodotto prodotto = JsonConvert.DeserializeObject<Prodotto>(responseBody);
+
+                    var singleProductList = new List<Prodotto> { prodotto };
+
+                    dataGridView1.DataSource = singleProductList;
+
+                    MessageBox.Show($"Prodotto ID: {prodotto.Prodottoid}\nNome: {prodotto.nome}\nPrezzo: {prodotto.prezzo}\nCategoria: {prodotto.categoria}\nSviluppatore: {prodotto.sviluppatore}\nPubblicatore: {prodotto.pubblicatore}");
+                }
+                else
+                {
+                    MessageBox.Show("Errore: " + response.StatusCode);
+                }
             }
+            txtRecord.Clear();
         }
+
 
         private async void btnPost_Click(object sender, EventArgs e)
         {
